@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2487.2">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 10.7px 0.0px; line-height: 18.4px; font: 16.0px Helvetica; color: #000000}
+    span.s1 {font-kerning: none}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;head&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;meta charset="utf-8" /&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;title&gt;Qualtrics Map Selector&lt;/title&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" /&gt;</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">  &lt;!-- Mapbox CSS --&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;link</span></p>
+<p class="p1"><span class="s1">    href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css"</span></p>
+<p class="p1"><span class="s1">    rel="stylesheet"</span></p>
+<p class="p1"><span class="s1">  /&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;link</span></p>
+<p class="p1"><span class="s1">    href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.1/mapbox-gl-geocoder.css"</span></p>
+<p class="p1"><span class="s1">    rel="stylesheet"</span></p>
+<p class="p1"><span class="s1">  /&gt;</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">  &lt;style&gt;</span></p>
+<p class="p1"><span class="s1">    body { margin: 0; padding: 0; }</span></p>
+<p class="p1"><span class="s1">    #map { position: absolute; top: 0; bottom: 0; width: 100%; }</span></p>
+<p class="p1"><span class="s1">  &lt;/style&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;body&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;div id="map"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">  &lt;!-- Mapbox JS --&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.1/mapbox-gl-geocoder.min.js"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">  &lt;script&gt;</span></p>
+<p class="p1"><span class="s1">    // ==== Replace with your token ====</span></p>
+<p class="p1"><span class="s1">    mapboxgl.accessToken = pk.eyJ1IjoiZ3dpbGRlcm11dGgiLCJhIjoiY21nNnZmdmtsMGE1YzJrcHU0ZjFmeW5pOSJ9.SlR-H7p7JCgjn65Jcrzq6g;</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">    // ==== Your state parks list ====</span></p>
+<p class="p1"><span class="s1">    const stateParks = [</span></p>
+<p class="p1"><span class="s1">  { name: "Allegheny Islands State Park", coordinates: [-79.845368, 40.573101] },</span></p>
+<p class="p1"><span class="s1">  { name: "Archbald Pothole State Park", coordinates: [-75.578249, 41.507150] },</span></p>
+<p class="p1"><span class="s1">  { name: "Bald Eagle State Park", coordinates: [-77.651135, 41.034513] },</span></p>
+<p class="p1"><span class="s1">  { name: "Beltzville State Park", coordinates: [-75.628723, 40.863098] },</span></p>
+<p class="p1"><span class="s1">  { name: "Bendigo State Park", coordinates: [-78.682358, 41.506969] },</span></p>
+<p class="p1"><span class="s1">  { name: "Benjamin Rush State Park", coordinates: [-74.987598, 40.113987] },</span></p>
+<p class="p1"><span class="s1">  { name: "Big Elk Creek State Park", coordinates: [-75.835656, 39.730575] },</span></p>
+<p class="p1"><span class="s1">  { name: "Big Pocono State Park", coordinates: [-75.336608, 41.053360] },</span></p>
+<p class="p1"><span class="s1">  { name: "Big Spring State Park", coordinates: [-77.581526, 40.305080] },</span></p>
+<p class="p1"><span class="s1">  { name: "Black Moshannon State Park", coordinates: [-78.056679, 40.912225] },</span></p>
+<p class="p1"><span class="s1">  { name: "Blue Knob State Park", coordinates: [-78.583537, 40.266539] },</span></p>
+<p class="p1"><span class="s1">  { name: "Boyd Big Tree Preserve Conservation Area", coordinates: [-76.871382, 40.364419] },</span></p>
+<p class="p1"><span class="s1">  { name: "Buchanan's Birthplace State Park", coordinates: [-77.954935, 39.893381] },</span></p>
+<p class="p1"><span class="s1">  { name: "Bucktail State Park Natural Area", coordinates: [-77.741539, 41.309180] },</span></p>
+<p class="p1"><span class="s1">  { name: "Caledonia State Park", coordinates: [-77.478273, 39.908747] },</span></p>
+<p class="p1"><span class="s1">  { name: "Canoe Creek State Park", coordinates: [-78.290824, 40.480405] },</span></p>
+<p class="p1"><span class="s1">  { name: "Chapman State Park", coordinates: [-79.171189, 41.757700] },</span></p>
+<p class="p1"><span class="s1">  { name: "Cherry Springs State Park", coordinates: [-77.829190, 41.666151] },</span></p>
+<p class="p1"><span class="s1">  { name: "Clear Creek State Park", coordinates: [-79.077047, 41.322982] },</span></p>
+<p class="p1"><span class="s1">  { name: "Codorus State Park", coordinates: [-76.918197, 39.789913] },</span></p>
+<p class="p1"><span class="s1">  { name: "Colonel Denning State Park", coordinates: [-77.418314, 40.280749] },</span></p>
+<p class="p1"><span class="s1">  { name: "Colton Point State Park", coordinates: [-77.432527, 41.740647] },</span></p>
+<p class="p1"><span class="s1">  { name: "Cook Forest State Park", coordinates: [-79.209363, 41.332790] },</span></p>
+<p class="p1"><span class="s1">  { name: "Cowans Gap State Park", coordinates: [-77.923989, 39.995233] },</span></p>
+<p class="p1"><span class="s1">  { name: "Delaware Canal State Park", coordinates: [-75.087151, 40.545875] },</span></p>
+<p class="p1"><span class="s1">  { name: "Denton Hill State Park", coordinates: [-77.824103, 41.776562] },</span></p>
+<p class="p1"><span class="s1">  { name: "Elk State Park", coordinates: [-78.600868, 41.561198] },</span></p>
+<p class="p1"><span class="s1">  { name: "Erie Bluffs State Park", coordinates: [-80.375976, 42.015188] },</span></p>
+<p class="p1"><span class="s1">  { name: "Evansburg State Park", coordinates: [-75.404846, 40.201147] },</span></p>
+<p class="p1"><span class="s1">  { name: "Fort Washington State Park", coordinates: [-75.217243, 40.130326] },</span></p>
+<p class="p1"><span class="s1">  { name: "Fowlers Hollow State Park", coordinates: [-77.571196, 40.281331] },</span></p>
+<p class="p1"><span class="s1">  { name: "Frances Slocum State Park", coordinates: [-75.891599, 41.347941] },</span></p>
+<p class="p1"><span class="s1">  { name: "French Creek State Park", coordinates: [-75.792986, 40.198245] },</span></p>
+<p class="p1"><span class="s1">  { name: "Gifford Pinchot State Park", coordinates: [-76.888474, 40.087026] },</span></p>
+<p class="p1"><span class="s1">  { name: "Gouldsboro State Park", coordinates: [-75.469032, 41.243382] },</span></p>
+<p class="p1"><span class="s1">  { name: "Greenwood Furnace State Park", coordinates: [-77.754468, 40.650644] },</span></p>
+<p class="p1"><span class="s1">  { name: "Hickory Run State Park", coordinates: [-75.834642, 41.009169] },</span></p>
+<p class="p1"><span class="s1">  { name: "Hillman State Park", coordinates: [-80.405938, 40.468595] },</span></p>
+<p class="p1"><span class="s1">  { name: "Hills Creek State Park", coordinates: [-77.190803, 41.804155] },</span></p>
+<p class="p1"><span class="s1">  { name: "Hyner Run State Park", coordinates: [-77.627897, 41.358347] },</span></p>
+<p class="p1"><span class="s1">  { name: "Hyner View State Park", coordinates: [-77.603179, 41.339886] },</span></p>
+<p class="p1"><span class="s1">  { name: "Jacobsburg Environmental Education Center", coordinates: [-75.294500, 40.784040] },</span></p>
+<p class="p1"><span class="s1">  { name: "Jennings Environmental Education Center", coordinates: [-80.005580, 41.007843] },</span></p>
+<p class="p1"><span class="s1">  { name: "Joseph E. Ibberson Conservation Area", coordinates: [-76.861957, 40.443167] },</span></p>
+<p class="p1"><span class="s1">  { name: "Kettle Creek State Park", coordinates: [-77.928956, 41.376026] },</span></p>
+<p class="p1"><span class="s1">  { name: "Keystone State Park", coordinates: [-79.379763, 40.376039] },</span></p>
+<p class="p1"><span class="s1">  { name: "Kings Gap Environmental Education Center", coordinates: [-77.265456, 40.093283] },</span></p>
+<p class="p1"><span class="s1">  { name: "Kinzua Bridge State Park", coordinates: [-78.587023, 41.759822] },</span></p>
+<p class="p1"><span class="s1">  { name: "Kooser State Park", coordinates: [-79.228875, 40.061450] },</span></p>
+<p class="p1"><span class="s1">  { name: "Lackawanna State Park", coordinates: [-75.704932, 41.561850] },</span></p>
+<p class="p1"><span class="s1">  { name: "Laurel Hill State Park", coordinates: [-79.224136, 40.010092] },</span></p>
+<p class="p1"><span class="s1">  { name: "Laurel Mountain State Park", coordinates: [-79.126810, 40.172146] },</span></p>
+<p class="p1"><span class="s1">  { name: "Laurel Ridge State Park", coordinates: [-79.364317, 39.956902] },</span></p>
+<p class="p1"><span class="s1">  { name: "Laurel Summit State Park", coordinates: [-79.154032, 40.063613] },</span></p>
+<p class="p1"><span class="s1">  { name: "Lehigh Gorge State Park (North)", coordinates: [-75.773122, 41.062943] },</span></p>
+<p class="p1"><span class="s1">  { name: "Lehigh Gorge State Park (South)", coordinates: [-75.764408, 40.964603] },</span></p>
+<p class="p1"><span class="s1">  { name: "Leonard Harrison State Park", coordinates: [-77.451410, 41.697900] },</span></p>
+<p class="p1"><span class="s1">  { name: "Linn Run State Park", coordinates: [-79.213213, 40.154448] },</span></p>
+<p class="p1"><span class="s1">  { name: "Little Buffalo State Park", coordinates: [-77.168213, 40.458741] },</span></p>
+<p class="p1"><span class="s1">  { name: "Little Pine State Park", coordinates: [-77.357518, 41.363154] },</span></p>
+<p class="p1"><span class="s1">  { name: "Locust Lake State Park", coordinates: [-76.117438, 40.784980] },</span></p>
+<p class="p1"><span class="s1">  { name: "Lyman Run State Park", coordinates: [-77.848678, 41.748148] },</span></p>
+<p class="p1"><span class="s1">  { name: "Marsh Creek State Park", coordinates: [-75.718267, 40.065776] },</span></p>
+<p class="p1"><span class="s1">  { name: "Maurice K. Goddard State Park", coordinates: [-80.144937, 41.427351] },</span></p>
+<p class="p1"><span class="s1">  { name: "McCalls Dam State Park", coordinates: [-77.183493, 41.016217] },</span></p>
+<p class="p1"><span class="s1">  { name: "McConnells Mill State Park", coordinates: [-80.183039, 40.950485] },</span></p>
+<p class="p1"><span class="s1">  { name: "Memorial Lake State Park", coordinates: [-76.601560, 40.423793] },</span></p>
+<p class="p1"><span class="s1">  { name: "Milton State Park", coordinates: [-76.842805, 41.010980] },</span></p>
+<p class="p1"><span class="s1">  { name: "Mont Alto State Park", coordinates: [-77.553300, 39.842460] },</span></p>
+<p class="p1"><span class="s1">  { name: "Moraine State Park", coordinates: [-80.097048, 40.939669] },</span></p>
+<p class="p1"><span class="s1">  { name: "Mount Pisgah State Park", coordinates: [-76.672895, 41.804508] },</span></p>
+<p class="p1"><span class="s1">  { name: "Nescopeck State Park", coordinates: [-75.954209, 41.040929] },</span></p>
+<p class="p1"><span class="s1">  { name: "Neshaminy State Park", coordinates: [-74.921981, 40.078963] },</span></p>
+<p class="p1"><span class="s1">  { name: "Nockamixon State Park", coordinates: [-75.242013, 40.463580] },</span></p>
+<p class="p1"><span class="s1">  { name: "Nolde Forest Environmental Education Center", coordinates: [-75.946667, 40.272313] },</span></p>
+<p class="p1"><span class="s1">  { name: "Norristown Farm Park", coordinates: [-75.342300, 40.145590] },</span></p>
+<p class="p1"><span class="s1">  { name: "Ohiopyle State Park", coordinates: [-79.494524, 39.866791] },</span></p>
+<p class="p1"><span class="s1">  { name: "Oil Creek State Park", coordinates: [-79.689321, 41.488053] },</span></p>
+<p class="p1"><span class="s1">  { name: "Ole Bull State Park", coordinates: [-77.715380, 41.537772] },</span></p>
+<p class="p1"><span class="s1">  { name: "Parker Dam State Park", coordinates: [-78.511700, 41.193494] },</span></p>
+<p class="p1"><span class="s1">  { name: "Patterson State Park", coordinates: [-77.895330, 41.708503] },</span></p>
+<p class="p1"><span class="s1">  { name: "Penn-Roosevelt State Park", coordinates: [-77.698624, 40.720817] },</span></p>
+<p class="p1"><span class="s1">  { name: "Pine Grove Furnace State Park", coordinates: [-77.304536, 40.032961] },</span></p>
+<p class="p1"><span class="s1">  { name: "Poe Paddy State Park", coordinates: [-77.417563, 40.833630] },</span></p>
+<p class="p1"><span class="s1">  { name: "Poe Valley State Park", coordinates: [-77.477042, 40.818858] },</span></p>
+<p class="p1"><span class="s1">  { name: "Point State Park", coordinates: [-80.006904, 40.441035] },</span></p>
+<p class="p1"><span class="s1">  { name: "Presque Isle State Park", coordinates: [-80.153508, 42.109518] },</span></p>
+<p class="p1"><span class="s1">  { name: "Prince Gallitzin State Park", coordinates: [-78.559769, 40.649436] },</span></p>
+<p class="p1"><span class="s1">  { name: "Promised Land State Park", coordinates: [-75.214151, 41.299201] },</span></p>
+<p class="p1"><span class="s1">  { name: "Prompton State Park", coordinates: [-75.389208, 41.626031] },</span></p>
+<p class="p1"><span class="s1">  { name: "Prouty Place State Park", coordinates: [-77.912454, 41.672015] },</span></p>
+<p class="p1"><span class="s1">  { name: "Pymatuning State Park", coordinates: [-80.468239, 41.499340] },</span></p>
+<p class="p1"><span class="s1">  { name: "Raccoon Creek State Park", coordinates: [-80.424110, 40.502953] },</span></p>
+<p class="p1"><span class="s1">  { name: "Ralph Stover State Park", coordinates: [-75.099186, 40.434094] },</span></p>
+<p class="p1"><span class="s1">  { name: "Ravensburg State Park", coordinates: [-77.236074, 41.123602] },</span></p>
+<p class="p1"><span class="s1">  { name: "Raymond B. Winter State Park", coordinates: [-77.202316, 40.992972] },</span></p>
+<p class="p1"><span class="s1">  { name: "Reeds Gap State Park", coordinates: [-77.476870, 40.722400] },</span></p>
+<p class="p1"><span class="s1">  { name: "Ricketts Glen State Park", coordinates: [-76.302889, 41.336052] },</span></p>
+<p class="p1"><span class="s1">  { name: "Ridley Creek State Park", coordinates: [-75.437574, 39.950796] },</span></p>
+<p class="p1"><span class="s1">  { name: "Ryerson Station State Park", coordinates: [-80.445007, 39.886475] },</span></p>
+<p class="p1"><span class="s1">  { name: "Salt Springs State Park", coordinates: [-75.865337, 41.912212] },</span></p>
+<p class="p1"><span class="s1">  { name: "Samuel S. Lewis State Park", coordinates: [-76.549645, 39.996714] },</span></p>
+<p class="p1"><span class="s1">  { name: "Sand Bridge State Park", coordinates: [-77.126963, 40.987685] },</span></p>
+<p class="p1"><span class="s1">  { name: "Shawnee State Park", coordinates: [-78.635545, 40.026486] },</span></p>
+<p class="p1"><span class="s1">  { name: "Shikellamy State Park", coordinates: [-76.788549, 40.885844] },</span></p>
+<p class="p1"><span class="s1">  { name: "Simon B. Elliott State Park", coordinates: [-78.525667, 41.112644] },</span></p>
+<p class="p1"><span class="s1">  { name: "Sinnemahoning State Park", coordinates: [-78.113669, 41.687410] },</span></p>
+<p class="p1"><span class="s1">  { name: "Sizerville State Park", coordinates: [-78.183677, 41.595998] },</span></p>
+<p class="p1"><span class="s1">  { name: "Susquehanna Riverlands State Park", coordinates: [-76.549645, 39.996714] },</span></p>
+<p class="p1"><span class="s1">  { name: "Susquehanna State Park", coordinates: [-77.048881, 41.233097] },</span></p>
+<p class="p1"><span class="s1">  { name: "Susquehannock State Park", coordinates: [-76.266819, 39.810403] },</span></p>
+<p class="p1"><span class="s1">  { name: "Swatara State Park", coordinates: [-76.515026, 40.511800] },</span></p>
+<p class="p1"><span class="s1">  { name: "Tobyhanna State Park", coordinates: [-78.590264, 40.015332] },</span></p>
+<p class="p1"><span class="s1">  { name: "Trough Creek State Park", coordinates: [-78.129725, 40.312126] },</span></p>
+<p class="p1"><span class="s1">  { name: "Tuscarora State Park", coordinates: [-76.027462, 40.805952] },</span></p>
+<p class="p1"><span class="s1">  { name: "Tyler State Park", coordinates: [-74.951314, 40.233374] },</span></p>
+<p class="p1"><span class="s1">  { name: "Upper Pine Bottom State Park", coordinates: [-77.474959, 41.328602] },</span></p>
+<p class="p1"><span class="s1">  { name: "Varden Conservation Area", coordinates: [-75.401396, 41.479416] },</span></p>
+<p class="p1"><span class="s1">  { name: "Vosburg Neck State Park", coordinates: [-76.008811, 41.554077] },</span></p>
+<p class="p1"><span class="s1">  { name: "Warriors Path State Park", coordinates: [-78.242395, 40.201100] },</span></p>
+<p class="p1"><span class="s1">  { name: "Washington Crossing Historic Park", coordinates: [-74.872017, 40.295904] },</span></p>
+<p class="p1"><span class="s1">  { name: "Whipple Dam State Park", coordinates: [-77.861160, 40.685777] },</span></p>
+<p class="p1"><span class="s1">  { name: "White Clay Creek Preserve", coordinates: [-75.774726, 39.746214] },</span></p>
+<p class="p1"><span class="s1">  { name: "Worlds End State Park", coordinates: [-76.601316, 41.489442] },</span></p>
+<p class="p1"><span class="s1">  { name: "Yellow Creek State Park", coordinates: [-79.001071, 40.577822] }</span></p>
+<p class="p1"><span class="s1">];</span></p>
+<p class="p1"><span class="s1">    // ==== Initialize map ====</span></p>
+<p class="p1"><span class="s1">    const map = new mapboxgl.Map({</span></p>
+<p class="p1"><span class="s1">      container: 'map',</span></p>
+<p class="p1"><span class="s1">      style: 'mapbox://styles/mapbox/streets-v11',</span></p>
+<p class="p1"><span class="s1">      center: [-77, 41], // PA center</span></p>
+<p class="p1"><span class="s1">      zoom: 6</span></p>
+<p class="p1"><span class="s1">    });</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">    // ==== Custom geocoder (adds state parks) ====</span></p>
+<p class="p1"><span class="s1">    function forwardGeocoder(query) {</span></p>
+<p class="p1"><span class="s1">      const matches = [];</span></p>
+<p class="p1"><span class="s1">      for (const park of stateParks) {</span></p>
+<p class="p1"><span class="s1">        if (park.name.toLowerCase().includes(query.toLowerCase())) {</span></p>
+<p class="p1"><span class="s1">          matches.push({</span></p>
+<p class="p1"><span class="s1">            center: park.coordinates,</span></p>
+<p class="p1"><span class="s1">            place_name: park.name,</span></p>
+<p class="p1"><span class="s1">            place_type: ["park"],</span></p>
+<p class="p1"><span class="s1">            type: "Feature",</span></p>
+<p class="p1"><span class="s1">            geometry: { type: "Point", coordinates: park.coordinates },</span></p>
+<p class="p1"><span class="s1">            properties: {}</span></p>
+<p class="p1"><span class="s1">          });</span></p>
+<p class="p1"><span class="s1">        }</span></p>
+<p class="p1"><span class="s1">      }</span></p>
+<p class="p1"><span class="s1">      return matches;</span></p>
+<p class="p1"><span class="s1">    }</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">    const geocoder = new MapboxGeocoder({</span></p>
+<p class="p1"><span class="s1">      accessToken: mapboxgl.accessToken,</span></p>
+<p class="p1"><span class="s1">      localGeocoder: forwardGeocoder,</span></p>
+<p class="p1"><span class="s1">      zoom: 10,</span></p>
+<p class="p1"><span class="s1">      placeholder: 'Search for a place or park',</span></p>
+<p class="p1"><span class="s1">      mapboxgl: mapboxgl</span></p>
+<p class="p1"><span class="s1">    });</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">    map.addControl(geocoder);</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">    // ==== Marker ====</span></p>
+<p class="p1"><span class="s1">    const marker = new mapboxgl.Marker({ draggable: true });</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">    geocoder.on('result', e =&gt; {</span></p>
+<p class="p1"><span class="s1">      const coords = e.result.center;</span></p>
+<p class="p1"><span class="s1">      marker.setLngLat(coords).addTo(map);</span></p>
+<p class="p1"><span class="s1">      sendSelection(e.result.place_name, coords);</span></p>
+<p class="p1"><span class="s1">    });</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">    marker.on('dragend', () =&gt; {</span></p>
+<p class="p1"><span class="s1">      const coords = marker.getLngLat();</span></p>
+<p class="p1"><span class="s1">      sendSelection('Custom Location', [coords.lng, coords.lat]);</span></p>
+<p class="p1"><span class="s1">    });</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">    // ==== Show small towns earlier ====</span></p>
+<p class="p1"><span class="s1">    map.on('load', () =&gt; {</span></p>
+<p class="p1"><span class="s1">      const layers = map.getStyle().layers;</span></p>
+<p class="p1"><span class="s1">      layers.forEach(l =&gt; {</span></p>
+<p class="p1"><span class="s1">        if (l.type === 'symbol' &amp;&amp;</span></p>
+<p class="p1"><span class="s1">            l['source-layer'] &amp;&amp;</span></p>
+<p class="p1"><span class="s1">            l['source-layer'].includes('place')) {</span></p>
+<p class="p1"><span class="s1">          try {</span></p>
+<p class="p1"><span class="s1">            map.setLayerZoomRange(l.id, 0, 24);</span></p>
+<p class="p1"><span class="s1">            map.setLayoutProperty(l.id, 'text-allow-overlap', true);</span></p>
+<p class="p1"><span class="s1">          } catch (e) {}</span></p>
+<p class="p1"><span class="s1">        }</span></p>
+<p class="p1"><span class="s1">      });</span></p>
+<p class="p1"><span class="s1">    });</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">    // ==== Send selection back (via postMessage) ====</span></p>
+<p class="p1"><span class="s1">    function sendSelection(name, coords) {</span></p>
+<p class="p1"><span class="s1">      const data = {</span></p>
+<p class="p1"><span class="s1">        place: name,</span></p>
+<p class="p1"><span class="s1">        lat: coords[1],</span></p>
+<p class="p1"><span class="s1">        lng: coords[0]</span></p>
+<p class="p1"><span class="s1">      };</span></p>
+<p class="p1"><span class="s1">      window.parent.postMessage(data, "*");</span></p>
+<p class="p1"><span class="s1">      console.log("Selected:", data);</span></p>
+<p class="p1"><span class="s1">    }</span></p>
+<p class="p1"><span class="s1">  &lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+</body>
+</html>
